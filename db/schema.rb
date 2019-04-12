@@ -43,12 +43,11 @@ ActiveRecord::Schema.define(version: 2019_04_12_153945) do
 
   create_table "users", force: :cascade do |t|
     t.string "slack_id"
-    t.string "is_admin"
-    t.string "is_bot"
+    t.boolean "is_admin"
+    t.boolean "is_bot"
     t.string "name"
-    t.string "last_name"
     t.string "email"
-    t.string "image_42"
+    t.string "image_72"
     t.string "real_name"
     t.string "display_name"
     t.datetime "created_at", null: false
