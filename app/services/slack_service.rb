@@ -29,9 +29,9 @@ class SlackService
       slack_user = get_slack_user(user_id)
       new_user = User.find_or_create_by(slack_id: slack_user.id)
       new_user.update_attributes({ is_admin: slack_user.is_admin, is_bot: slack_user.is_bot,
-        name: slack_user.name, last_name: slack_user.last_name, email: slack_user.email,
-        image_42: slack_user.image_42,real_name: slack_user.real_name,
-        display_name: slack_user.display_name })
+        name: slack_user.name, email: slack_user.profile.email,
+        image_72: slack_user.profile.image_72, real_name: slack_user.real_name,
+        display_name: slack_user.profile.display_name })
     end
     
     existing_user_ids.each do |user_id|
