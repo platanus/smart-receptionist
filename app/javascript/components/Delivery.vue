@@ -19,6 +19,7 @@
 
 <script>
 import ApiService from '../services/api.js';
+const client = new ApiService;
 
 export default {
   name: 'delivery',
@@ -32,12 +33,10 @@ export default {
       this.$router.push({ path: '/' });
     },
     notifyUser(userId) {
-      const client = new ApiService
-      client.notifyUser(userId)
-    }
+      client.notifyUser(userId);
+    },
   },
   async mounted() {
-    const client = new ApiService
     this.users = await client.getUsers();
   },
 };
