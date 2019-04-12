@@ -1,18 +1,31 @@
-/* eslint no-console: 0 */
+import Vue from 'vue/dist/vue.js';
 
-import Vue from 'vue'
-import App from '../app.vue'
+import Router from 'vue-router';
+
+import Meeting from '../components/Meeting.vue';
+import Delivery from '../components/Delivery.vue';
+import Menu from '../components/Menu.vue';
+
+Vue.config.productionTip = false;
+Vue.use(Router);
+
+const router = new Router({
+  mode: 'history',
+  routes: [
+    { path: '/', component: Menu },
+    { path: '/meeting', component: Meeting },
+    { path: '/delivery', component: Delivery },
+  ],
+});
 
 document.addEventListener('DOMContentLoaded', () => {
-  const el = document.body.appendChild(document.createElement('hello'))
-  const app = new Vue({
-    el,
-    render: h => h(App)
-  })
+  if (document.getElementById('app') !== null) {
+    return new Vue({
+      router,
+      el: '#app',
+      render: h => h(Vue.compile('<div class="app"><router-view></router-view></div>')),
+    });
+  }
 
-  console.log(app)
-})
-
-
-
-
+  return null;
+});

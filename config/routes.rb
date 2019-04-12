@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users
   mount Sidekiq::Web => '/queue'
+  root 'application#index'
   resources :users, only: :index
   resources :notifications, only: :create
 end
