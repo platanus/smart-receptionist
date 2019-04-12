@@ -6,7 +6,7 @@
       <button class="header__back" v-on:click="back()"></button>
     </div>
     <div class="people">
-      <div class="user-card" v-bind:key="user.id" v-for="user in users">
+      <div class="user-card" v-on:click="notifyUser(user.id)" v-bind:key="user.id" v-for="user in users">
         <img class="user-card__avatar" :src="user.image72">
         <div class="user-card__data">
           <div class="user-card__name">{{ user.name }}</div>
@@ -31,6 +31,10 @@ export default {
     back() {
       this.$router.push({ path: '/' });
     },
+    notifyUser(userId) {
+      const client = new ApiService
+      client.notifyUser(userId)
+    }
   },
   async mounted() {
     const client = new ApiService
