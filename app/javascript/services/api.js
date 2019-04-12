@@ -13,6 +13,15 @@ class ApiService {
       .then(response => response.json())
       .then(response => humps.camelizeKeys(response.users));
   }
+
+  notifyUser(userId) {
+    const body = { isPrivate: true, userId: userId }
+    return fetch(`${this.baseUrl}/notifications`, {
+      ...this.options,
+      method: 'POST',
+      body: JSON.stringify(humps.decamelizeKeys(body)),
+    });
+  }
 }
 
 export default ApiService;
