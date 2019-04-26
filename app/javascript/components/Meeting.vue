@@ -6,25 +6,28 @@
     </div>
     <div class="companies" v-show="!askGuestName">
       <button class="header__back" v-on:click="back()"></button>
-      <div class="companies__company" v-on:click="showGuest('Buda')">
+      <div class="companies__company" v-on:click="showGuest('buda')">
         <img class="companies__company__logo" :src="require('images/buda-logo.png')">
       </div>
-      <div class="companies__company" v-on:click="showGuest('Fintual')">
+      <div class="companies__company" v-on:click="showGuest('fintual')">
         <img class="companies__company__logo" :src="require('images/fintual-logo.png')">
       </div>
-      <div class="companies__company" v-on:click="showGuest('Platanus')">
+      <div class="companies__company" v-on:click="showGuest('platanus')">
         <img class="companies__company__logo" :src="require('images/platanus-logo.png')">
       </div>
     </div>
     <div class="guest" v-show="askGuestName">
       <button class="header__back" v-on:click="hideGuest()"></button>
       <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus>
-      <button class="guest__confirm">Notificar!</button>
+      <button v-on:click="notifyChannel()" class="guest__confirm">Notificar!</button>
     </div>
   </div>
 </template>
 
 <script>
+import ApiService from '../services/api.js';
+const client = new ApiService;
+
 export default {
   name: 'meeting',
   data() {
@@ -43,6 +46,10 @@ export default {
       this.title = '¿Cuál es tu nombre?';
       this.subtitle = `avisaré a ${company} que llegaste`;
       this.$refs.input.focus();
+    },
+    notifyChannel() {
+      const message = `<!here>, llegó ${this.guestName} para que le abran la puerta`;
+      client.notifyChannel(this.company, message);
     },
     hideGuest() {
       this.company = '';

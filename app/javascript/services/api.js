@@ -22,6 +22,15 @@ class ApiService {
       body: JSON.stringify(humps.decamelizeKeys(body)),
     });
   }
+
+  notifyChannel(companyName, message) {
+    const body = { isPrivate: false, companyName: companyName, message: message }
+    return fetch(`${this.baseUrl}/notifications`, {
+      ...this.options,
+      method: 'POST',
+      body: JSON.stringify(humps.decamelizeKeys(body)),
+    });
+  }
 }
 
 export default ApiService;
