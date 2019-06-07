@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div class="menu">
     <div class="header">
       <div class="header__title">Bienvenido a L'Conquistator</div>
       <div class="header__subtitle">Qué se le ofrece?</div>
     </div>
-    <div class="menu">
+    <div class="companies">
       <div class="action" v-on:click="goToMeeting()">
         <div class="logo__container">
           <img class="action__logo" :src="require('images/buda-logo.png')">
@@ -57,17 +57,21 @@ export default {
 <style lang="scss">
 .app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  position: relative;
-  overflow: hidden;
+  position: absolute;
+  width: 100%;
+  min-height: 100%;
+  background-color: white;
+}
+
+.menu {
+  margin-top: 15vh
 }
 
 .header {
   margin-top: 40px;
-  margin-bottom: 18px; 
+  margin-bottom: 18px;
 
   &__title {
     font-size: 32px;
@@ -87,11 +91,11 @@ export default {
     left: 50px;
     position: absolute;
     top: 50px;
-    width: 42px; 
+    width: 42px;
   }
 }
 
-.menu {
+.companies {
   display: flex;
   width: 100%;
   text-align: center;

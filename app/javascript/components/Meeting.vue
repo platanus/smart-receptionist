@@ -67,14 +67,14 @@ export default {
 <style lang="scss" scoped>
 
 .header {
-  margin-top: 80px;
+  margin-top: 15vh;
 }
 
 .companies {
   display: flex;
   text-align: center;
   width: 100%;
-  
+
   &__company {
     margin-top: 3em;
 
@@ -86,7 +86,7 @@ export default {
 
 .guest {
   width: 100%;
-  margin-top: 2em;
+  margin-top: 20px;
 
   &__name {
     width: 70%;
@@ -98,21 +98,21 @@ export default {
     border-radius: 1px;
     padding-bottom: 8px;
     text-align: center;
-    font-family: helvetica;
     letter-spacing: 1.5px;
-    font-weight: 100;
     margin-bottom: 4px;
   }
 
   &__confirm {
-    width: 30%;
-    height: 34px;
-    border: none;
-    background-color: #22e34d;
+    background-color: #1f9cce;
+    border: solid 1px #eaeaea;
     border-radius: 3px;
     color: #fcfcfc;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
+    letter-spacing: .6px;
+    line-height: 32px;
+    margin-top: 15px;
+    width: 32%;
   }
 }
 </style>
