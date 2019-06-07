@@ -56,12 +56,10 @@ export default {
 
 <style lang="scss" scoped>
   .notified-modal {
-    position: fixed;
     height: 100%;
-    display: flex;
+    padding-top: 20vh;
+    position: absolute;
     width: 100%;
-    flex-direction: column;
-    justify-content: center;
 
     &__title {
       font-size: 38px;
