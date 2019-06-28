@@ -16,4 +16,5 @@ end
 #  display_name :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  deleted      :boolean          default(FALSE)
 #
