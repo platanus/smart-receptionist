@@ -3,7 +3,7 @@
     <div v-if="!timer">
       <div class="header">
         <div class="header__title">¿A quién buscas?</div>
-        <div class="header__subtitle">Lo notificaré</div>
+        <div class="header__subtitle">Escribe su nombre o búscalo</div>
         <button class="header__back" v-on:click="back()"></button>
       </div>
       <div class="search">
@@ -13,8 +13,7 @@
         <div class="user-card" v-on:click="notifyUser(user)" v-bind:key="user.id" v-for="user in filteredUsers">
           <img class="user-card__avatar" :src="user.image72">
           <div class="user-card__data">
-            <div class="user-card__name">{{ user.name }}</div>
-            <div class="user-card__email">{{ user.email }}</div>
+            <div class="user-card__name">{{ user.realName }}</div>
           </div>
         </div>
       </div>

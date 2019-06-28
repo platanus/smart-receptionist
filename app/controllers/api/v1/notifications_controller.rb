@@ -4,7 +4,8 @@ class Api::V1::NotificationsController < ApplicationController
   CHANNELS = {
     buda: ENV.fetch('BUDA_CHANNEL_NAME'),
     fintual: ENV.fetch('FINTUAL_CHANNEL_NAME'),
-    platanus: ENV.fetch('PLATANUS_CHANNEL_NAME')
+    platanus: ENV.fetch('PLATANUS_CHANNEL_NAME'),
+    general: ENV.fetch('GENERAL_CHANNEL_NAME')
   }
 
   def create

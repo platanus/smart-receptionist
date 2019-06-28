@@ -28,12 +28,14 @@ class SlackService
     coffeebar_user_ids.each do |user_id|
       slack_user = get_slack_user(user_id)
       new_user = User.find_or_create_by(slack_id: slack_user.id)
-      new_user.update_attributes({ is_admin: slack_user.is_admin, is_bot: slack_user.is_bot,
-        name: slack_user.name, email: slack_user.profile.email,
+      new_user.update(
+        is_admin: slack_user.is_admin, is_bot: slack_user.is_bot,
+        name: slack_user.name, email: slack_user.profile.email, deleted: slack_user.deleted,
         image_72: slack_user.profile.image_72, real_name: slack_user.real_name,
-        display_name: slack_user.profile.display_name })
+        display_name: slack_user.profile.display_name
+      )
     end
-    
+
     existing_user_ids.each do |user_id|
       if coffeebar_user_ids.exclude? user_id
         User.find_by(slack_id: user_id).delete

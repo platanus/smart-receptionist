@@ -1,27 +1,25 @@
 <template>
   <div class="menu">
     <div class="header">
-      <div class="header__title">Bienvenido a L'Conquistator</div>
-      <div class="header__subtitle">Qué se le ofrece?</div>
+      <div class="header__title">Bienvenido</div>
+      <div class="header__subtitle">Elige una opción</div>
     </div>
     <div class="companies">
       <div class="action" v-on:click="goToMeeting()">
         <div class="logo__container">
-          <img class="action__logo" :src="require('images/buda-logo.png')">
-          <img class="action__logo" :src="require('images/fintual-logo.png')">
-          <img class="action__logo" :src="require('images/platanus-logo.png')">
+          <img class="action__logo" :src="require('images/meeting-logo.png')">
         </div>
         <div class="action__title">Vengo a una reunión</div>
       </div>
       <div class="action" v-on:click="goToDelivery()">
           <div class="logo__container">
-            <img class="action__logo action__logo--square" :src="require('images/package-logo.png')">
+            <img class="action__logo" :src="require('images/package-logo.png')">
           </div>
-        <div class="action__title">Busco a alguien</div>
+        <div class="action__title">Traigo algo</div>
       </div>
-      <div class="action">
+      <div class="action" v-if="false">
           <div class="logo__container">
-            <img class="action__logo action__logo--square" :src="require('images/other-logo.png')">
+            <img class="action__logo" :src="require('images/other-logo.png')">
           </div>
         <div class="action__title">Vengo a otra cosa</div>
       </div>
@@ -62,11 +60,11 @@ export default {
   position: absolute;
   width: 100%;
   min-height: 100%;
-  background-color: white;
+  background-color: #fff;
 }
 
 .menu {
-  margin-top: 15vh
+  margin-top: 15vh;
 }
 
 .header {
@@ -77,16 +75,18 @@ export default {
     font-size: 32px;
     font-weight: 500;
   }
+
   &__subtitle {
     font-size: 24px;
     letter-spacing: 1.5px;
   }
+
   &__back {
     background-color: transparent;
-    background-image: url(../../assets/images/back.png);
+    background-image: url('../../assets/images/back.png');
     background-repeat: no-repeat;
     background-size: cover;
-    border: none;
+    border: 0;
     height: 42px;
     left: 50px;
     position: absolute;
@@ -111,7 +111,7 @@ export default {
 
 .action {
   flex: 1;
-  padding: 1em 0em;
+  padding: 1em 0;
   min-height: 150px;
   display: flex;
   flex-direction: column;
@@ -120,10 +120,6 @@ export default {
     margin-left: 50%;
     transform: translateX(-50%);
     width: 50%;
-
-    &--square {
-      max-width: 160px;
-    }
   }
 
   &__title {
