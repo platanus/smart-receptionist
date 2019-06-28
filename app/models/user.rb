@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  scope :active, -> { where(deleted: false) }
 end
 
 # == Schema Information
