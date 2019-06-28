@@ -13,7 +13,7 @@
         <div class="user-card" v-on:click="notifyUser(user)" v-bind:key="user.id" v-for="user in filteredUsers">
           <img class="user-card__avatar" :src="user.image72">
           <div class="user-card__data">
-            <div class="user-card__name">{{ user.name }}</div>
+            <div class="user-card__name">{{ user.realName }}</div>
           </div>
         </div>
       </div>
