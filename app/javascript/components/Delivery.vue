@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="!modal">
+    <div v-if="!timer">
       <div class="header">
         <div class="header__title">¿A quién buscas?</div>
         <div class="header__subtitle">Lo notificaré</div>
@@ -19,24 +19,12 @@
         </div>
       </div>
     </div>
-    <div v-if="modal" class="notified-modal">
-      <div class="notified-modal__title">
-        Le acabo de enviar un mensaje a {{ notifiedUser.name }}
-      </div>
-      <div class="notified-modal__message">
-        Si aun así no viene a abrir, toca el timbre nuevamente o insiste por aquí.
-      </div>
-      <div v-if="seconds" class="notified-modal__timer">
-        00:{{ seconds > 9 ? seconds : '0'+seconds }}
-      </div>
-      <div v-if="!seconds" class="notified-modal__message">Redirigiendo...</div>
-    </div>
+    <timer v-if="timer" :subject="notifiedUser.name"></timer>
   </div>
 </template>
 
 <script>
 import ApiService from '../services/api.js';
-import { setInterval, clearInterval, setTimeout } from 'timers';
 const client = new ApiService;
 
 export default {
@@ -47,7 +35,7 @@ export default {
       filteredUsers: {},
       query: '',
       notifiedUser: {},
-      modal: false,
+      timer: false,
       seconds: 15,
     };
   },
@@ -57,18 +45,9 @@ export default {
     },
     notifyUser(user) {
       this.notifiedUser = user;
-      this.modal = true;
-      this.startTimer();
+      this.timer = true;
       client.notifyUser(user.id);
     },
-    startTimer() {
-      const interval = setInterval(() => {
-        this.seconds--
-        if (!this.seconds) {
-          clearInterval(interval);
-        }
-      }, 1000);
-    }
   },
   async mounted() {
     this.users = await client.getUsers();
@@ -80,13 +59,6 @@ export default {
         return (user.name + user.email).toLowerCase().indexOf(this.query.toLowerCase()) >= 0;
       });
     },
-    seconds() {
-      if (this.seconds == 0) {
-        setTimeout(() => {
-          this.back()
-        }, 2000)
-      }
-    }
   }
 };
 </script>
@@ -139,30 +111,4 @@ export default {
     padding: 0 10px;
   }
 }
-
-.notified-modal {
-  position: fixed;
-  height: 100%;
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  justify-content: center;
-
-  &__title {
-    font-size: 38px;
-    line-height: 70px;
-  }
-
-  &__message {
-    font-size: 18px;
-  }
-
-  &__timer {
-    margin: 8px 0;
-    font-weight: 600;
-    font-size: 60px;
-  }
-}
 </style>
-
-

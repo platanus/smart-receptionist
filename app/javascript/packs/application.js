@@ -5,8 +5,10 @@ import Router from 'vue-router';
 import Meeting from '../components/Meeting.vue';
 import Delivery from '../components/Delivery.vue';
 import Menu from '../components/Menu.vue';
+import Timer from '../components/Timer.vue';
 
 Vue.config.productionTip = false;
+Vue.component('timer', Timer);
 Vue.use(Router);
 
 const router = new Router({

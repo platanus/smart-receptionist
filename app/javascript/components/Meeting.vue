@@ -1,26 +1,29 @@
 <template>
   <div>
-    <div class="header">
-      <div class="header__title">{{title}}</div>
-      <div class="header__subtitle">{{subtitle}}</div>
-    </div>
-    <div class="companies" v-show="!askGuestName">
-      <button class="header__back" v-on:click="back()"></button>
-      <div class="companies__company" v-on:click="showGuest('buda')">
-        <img class="companies__company__logo" :src="require('images/buda-logo.png')">
+    <div v-if="!timer">
+      <div class="header">
+        <div class="header__title">{{title}}</div>
+        <div class="header__subtitle">{{subtitle}}</div>
       </div>
-      <div class="companies__company" v-on:click="showGuest('fintual')">
-        <img class="companies__company__logo" :src="require('images/fintual-logo.png')">
+      <div class="companies" v-show="!askGuestName">
+        <button class="header__back" v-on:click="back()"></button>
+        <div class="companies__company" v-on:click="showGuest('buda')">
+          <img class="companies__company__logo" :src="require('images/buda-logo.png')">
+        </div>
+        <div class="companies__company" v-on:click="showGuest('fintual')">
+          <img class="companies__company__logo" :src="require('images/fintual-logo.png')">
+        </div>
+        <div class="companies__company" v-on:click="showGuest('platanus')">
+          <img class="companies__company__logo" :src="require('images/platanus-logo.png')">
+        </div>
       </div>
-      <div class="companies__company" v-on:click="showGuest('platanus')">
-        <img class="companies__company__logo" :src="require('images/platanus-logo.png')">
+      <div class="guest" v-show="askGuestName">
+        <button class="header__back" v-on:click="hideGuest()"></button>
+        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus>
+        <button v-on:click="notifyChannel()" class="guest__confirm">Notificar!</button>
       </div>
     </div>
-    <div class="guest" v-show="askGuestName">
-      <button class="header__back" v-on:click="hideGuest()"></button>
-      <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus>
-      <button v-on:click="notifyChannel()" class="guest__confirm">Notificar!</button>
-    </div>
+    <timer v-if="timer" :subject="company"></timer>
   </div>
 </template>
 
@@ -37,6 +40,7 @@ export default {
       company: '',
       guestName: '',
       askGuestName: false,
+      timer: false,
     };
   },
   methods: {
@@ -48,6 +52,7 @@ export default {
       this.$refs.input.focus();
     },
     notifyChannel() {
+      this.timer = true;
       const message = `<!here>, llegó ${this.guestName} para que le abran la puerta`;
       client.notifyChannel(this.company, message);
     },
