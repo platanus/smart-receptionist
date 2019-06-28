@@ -3,7 +3,6 @@
     <div v-if="!timer">
       <div class="header">
         <div class="header__title">{{title}}</div>
-        <div class="header__subtitle">{{subtitle}}</div>
       </div>
       <div class="companies" v-show="!askGuestName">
         <button class="header__back" v-on:click="back()"></button>
@@ -40,7 +39,6 @@ export default {
   data() {
     return {
       title: '¿A qué empresa vienes?',
-      subtitle: '',
       company: '',
       guestName: '',
       askGuestName: false,
@@ -52,7 +50,6 @@ export default {
       this.company = company;
       this.askGuestName = true;
       this.title = '¿Cuál es tu nombre?';
-      this.subtitle = `avisaré a ${company} que llegaste`;
       this.$refs.input.focus();
     },
     notifyChannel() {
@@ -63,8 +60,7 @@ export default {
     hideGuest() {
       this.company = '';
       this.askGuestName = false;
-      this.title = 'Con quién es la reunión?';
-      this.subtitle = '';
+      this.title = '¿A qué empresa vienes?';
     },
     back() {
       this.$router.push({ path: '/' })
