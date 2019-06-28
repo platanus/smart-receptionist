@@ -64,7 +64,7 @@ export default {
 }
 
 .menu {
-  margin-top: 15vh;
+  margin-top: 10vh;
 }
 
 .header {
@@ -72,7 +72,7 @@ export default {
   margin-bottom: 18px;
 
   &__title {
-    font-size: 32px;
+    font-size: 38px;
     font-weight: 500;
   }
 
@@ -124,7 +124,7 @@ export default {
 
   &__title {
     flex: 1;
-    font-size: 18px;
+    font-size: 28px;
     line-height: 20px;
     font-weight: 300;
   }
