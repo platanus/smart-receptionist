@@ -26,7 +26,7 @@
         <button v-on:click="notifyChannel()" class="guest__confirm">Avisar!</button>
       </div>
     </div>
-    <timer v-if="timer" :subject="company"></timer>
+    <timer v-if="timer"></timer>
   </div>
 </template>
 

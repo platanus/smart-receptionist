@@ -1,10 +1,10 @@
 <template>
   <div class="notified-modal">
     <div class="notified-modal__title">
-      Le acabo de enviar un mensaje a {{ subject }}
+      {{ subject ? `Le acabo de enviar un mensaje a ${subject}` : "Avisé que llegaste!"  }}
     </div>
     <div class="notified-modal__message">
-      Si aun así no te reciben, toca el timbre nuevamente o insiste por aquí.
+      Espera mientras vienen a recibirte
     </div>
     <div v-if="seconds" class="notified-modal__timer">
       00:{{ seconds > 9 ? seconds : '0'+seconds }}
@@ -62,7 +62,7 @@ export default {
     width: 100%;
 
     &__title {
-      font-size: 38px;
+      font-size: 36px;
       line-height: 70px;
     }
 
