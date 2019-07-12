@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    <timer v-if="timer" :subject="notifiedUser.name"></timer>
+    <timer v-if="timer" :subject="notifiedUser.realName"></timer>
   </div>
 </template>
 
