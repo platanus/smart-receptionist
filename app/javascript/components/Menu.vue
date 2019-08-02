@@ -82,15 +82,15 @@ body {
 
   &__back {
     background-color: transparent;
-    background-image: url('../../assets/images/back.png');
+    background-image: url('../../assets/images/back.svg');
     background-repeat: no-repeat;
     background-size: cover;
     border: 0;
-    height: 42px;
-    left: 50px;
+    height: 32px;
+    left: 35px;
     position: absolute;
-    top: 50px;
-    width: 42px;
+    top: 45px;
+    width: 32px;
   }
 
   &--left {
@@ -115,11 +115,11 @@ body {
     width: 120px;
 
     &--meeting {
-      background-image: url('~images/meeting.svg');
+      background-image: url('../../assets/images/meeting.svg');
     }
 
     &--delivery {
-      background-image: url('~images/delivery.svg');
+      background-image: url('../../assets/images/delivery.svg');
     }
   }
 
