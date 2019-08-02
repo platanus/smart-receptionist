@@ -50,6 +50,7 @@ export default {
 
 body {
   margin: 0;
+  overflow: hidden;
 }
 
 .app {
@@ -90,6 +91,11 @@ body {
     position: absolute;
     top: 50px;
     width: 42px;
+  }
+
+  &--left {
+    text-align: left;
+    margin-left: 96px;
   }
 }
 

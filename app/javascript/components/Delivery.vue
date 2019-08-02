@@ -1,24 +1,27 @@
 <template>
   <div>
     <div v-if="!timer" class="delivery">
-      <div class="column column--margin-top">
-        <div class="header">
+      <div class="column" v-if="!notifiedUser">
+        <div class="header header--left">
           <div class="header__title">¿A quién buscas?</div>
-          <div class="header__subtitle">Escribe su nombre o búscalo</div>
+          <div class="header__subtitle">Who are you looking for?</div>
           <button class="header__back" v-on:click="back()"></button>
         </div>
         <div class="search">
-          <input v-model="query" type="text" class="search__bar" autofocus>
+          <input v-model="query" type="text" class="search__bar" autofocus placeholder="Escribe aquí">
         </div>
       </div>
-      <div class="column column--big">
-        <div class="people">
-        <div class="user-card" v-on:click="notifyUser(user)" v-bind:key="user.id" v-for="user in filteredUsers">
+      <div class="column column--user" v-if="notifiedUser">
+        <button class="header__back" v-on:click="selectUser(null)"></button>
+        <div class="notified-user">{{ notifiedUser.realName }}</div>
+        <button v-on:click="notifyUser()" class="guest__confirm">Avisar</button>
+      </div>
+      <div class="people">
+        <div class="user-card" v-on:click="selectUser(user)" v-bind:key="user.id" v-for="user in filteredUsers">
           <img class="user-card__avatar" :src="user.image72">
           <div class="user-card__data">
             <div class="user-card__name">{{ user.realName }}</div>
           </div>
-        </div>
         </div>
       </div>
     </div>
@@ -37,7 +40,7 @@ export default {
       users: {},
       filteredUsers: {},
       query: '',
-      notifiedUser: {},
+      notifiedUser: null,
       timer: false,
       seconds: 15,
     };
@@ -46,10 +49,12 @@ export default {
     back() {
       this.$router.push({ path: '/' });
     },
-    notifyUser(user) {
+    selectUser(user) {
       this.notifiedUser = user;
+    },
+    notifyUser() {
       this.timer = true;
-      client.notifyUser(user.id);
+      client.notifyUser(this.notifiedUser.id);
     },
   },
   async mounted() {
@@ -67,73 +72,71 @@ export default {
 </script>
 
 <style lang="scss">
-body {
-  overflow: hidden;
-}
 
-.delivery {
-  display: flex;
-}
+@import '../styles/colors';
 
 .people {
   display: flex;
   flex-wrap: wrap;
-  flex: 4;
   overflow-y: scroll;
   max-height: 100vh;
+  width: 416px;
+  position: absolute;
+  right: 0;
+  top: 0;
 }
 
 .column {
-  flex: 3;
+  width: calc(100% - 416px);
 
-  &--big {
-    flex: 4;
-  }
-
-  &--margin-top {
-    margin-top: 35px;
+  &--user {
+    margin: 120px 80px;
+    text-align: left;
   }
 }
 
 .search {
   width: 100%;
-  display: flex;
-  text-align: center;
-  justify-content: center;
-  margin: 40px 0;
-  height: 60px;
+  margin: 60px 0;
+  height: 66px;
 
   &__bar {
     border: 0;
-    border-bottom: solid 1.5px #3210d3;
-    text-align: center;
+    border-bottom: solid 1.5px $progressBarColor;
+    text-align: left;
     width: 80%;
-    font-size: 42px;
-    color: #3a382b;
+    font-size: 56px;
+    line-height: 66px;
+    font-weight: 200;
+    padding-bottom: 10px;
   }
 }
 
 .user-card {
-  border: solid 1px;
+  border-bottom: solid 1px $subtitleColor;
   display: flex;
-  height: 60px;
-  padding: 10px;
-  margin: 10px;
-  width: calc(50% - 42px);
+  height: 80px;
+  padding: 6px;
+  width: 100%;
 
   &__avatar {
+    padding: 5px;
     border-radius: 50%;
-    height: 60px;
-    width: 60px;
+    height: 70px;
+    width: 70px;
   }
 
   &__data {
+    font-size: 18px;
+    line-height: 80px;
+    padding: 0 16px;
+    text-align: left;
     width: calc(100% - 90px);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    font-size: 16px;
-    padding: 0 10px;
   }
+}
+
+.notified-user {
+  line-height: 66px;
+  font-size: 56px;
 }
 </style>
