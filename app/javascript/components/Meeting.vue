@@ -14,8 +14,8 @@
       </div>
       <div class="guest" v-show="askGuestName">
         <button class="header__back" v-on:click="toggleGuest('')"></button>
-        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus placeholder="Escríbe aquí">
-        <button v-on:click="notifyChannel()" class="guest__confirm">Avisar!</button>
+        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus placeholder="Escribe aquí">
+        <button v-on:click="notifyChannel()" class="guest__confirm">Avisar</button>
       </div>
     </div>
     <timer v-if="timer"></timer>
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../styles/colors';
 
 .companies {
