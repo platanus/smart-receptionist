@@ -78,19 +78,19 @@ export default {
   margin: 28px 0;
 
   &--buda {
-    background-image: url('~images/buda.svg');
+    background-image: url('../../assets/images/buda.svg');
   }
 
   &--fintual {
-    background-image: url('~images/fintual.svg');
+    background-image: url('../../assets/images/fintual.svg');
   }
 
   &--platanus {
-    background-image: url('~images/platanus.svg');
+    background-image: url('../../assets/images/platanus.svg');
   }
 
   &--unknown {
-    background-image: url('~images/unknown.svg');
+    background-image: url('../../assets/images/unknown.svg');
   }
 }
 
