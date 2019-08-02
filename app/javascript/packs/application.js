@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return new Vue({
       router,
       el: '#app',
-      render: h => h(Vue.compile('<div class="app"><router-view></router-view></div>')),
+      render: h => h(Vue.compile('<div class="app"><div class="progress-bar"></div><router-view></router-view></div>')),
     });
   }
 
