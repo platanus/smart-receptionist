@@ -3,27 +3,19 @@
     <div v-if="!timer">
       <div class="header">
         <div class="header__title">{{title}}</div>
+        <div class="header__subtitle">{{subtitle}}</div>
+        <button class="header__back" v-on:click="back()"></button>
       </div>
       <div class="companies" v-show="!askGuestName">
-        <button class="header__back" v-on:click="back()"></button>
-        <div class="company" v-on:click="showGuest('buda')">
-          <img class="company__logo" :src="require('images/buda-logo.png')">
-        </div>
-        <div class="company" v-on:click="showGuest('fintual')">
-          <img class="company__logo" :src="require('images/fintual-logo.png')">
-        </div>
-        <div class="company" v-on:click="showGuest('platanus')">
-          <img class="company__logo" :src="require('images/platanus-logo.png')">
-        </div>
-        <div class="company" v-on:click="showGuest('general')">
-          <img class="company__logo company__logo--small" :src="require('images/unknown-logo.png')">
-          <div class="company__name">No sé</div>
-        </div>
+        <div class="company company--buda" v-on:click="toggleGuest('buda')" />
+        <div class="company company--fintual" v-on:click="toggleGuest('fintual')" />
+        <div class="company company--platanus" v-on:click="toggleGuest('platanus')" />
+        <div class="company company--unknown" v-on:click="toggleGuest('general')" />
       </div>
       <div class="guest" v-show="askGuestName">
-        <button class="header__back" v-on:click="hideGuest()"></button>
-        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus>
-        <button v-on:click="notifyChannel()" class="guest__confirm">Avisar!</button>
+        <button class="header__back" v-on:click="toggleGuest('')"></button>
+        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus placeholder="Escribe aquí">
+        <button v-on:click="notifyChannel()" class="guest__confirm">Avisar</button>
       </div>
     </div>
     <timer v-if="timer"></timer>
@@ -38,7 +30,8 @@ export default {
   name: 'meeting',
   data() {
     return {
-      title: '¿A qué empresa vienes?',
+      title: '¿En qué empresa?',
+      subtitle: 'In which company?',
       company: '',
       guestName: '',
       askGuestName: false,
@@ -46,21 +39,18 @@ export default {
     };
   },
   methods: {
-    showGuest(company) {
+    toggleGuest(company) {
       this.company = company;
-      this.askGuestName = true;
-      this.title = '¿Cuál es tu nombre?';
-      this.$refs.input.focus();
+      this.askGuestName
+      this.askGuestName = company ? true : false;
+      this.title = company ? '¿Cuál es tu nombre?' : '¿En qué empresa?';
+      this.subtitle = company ? "What is your first name?" : 'In which company';
+      if (company) this.$refs.input.focus();
     },
     notifyChannel() {
       this.timer = true;
       const message = `<!here>, llegó ${this.guestName} para que le abran la puerta`;
       client.notifyChannel(this.company, message);
-    },
-    hideGuest() {
-      this.company = '';
-      this.askGuestName = false;
-      this.title = '¿A qué empresa vienes?';
     },
     back() {
       this.$router.push({ path: '/' })
@@ -69,67 +59,69 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-.header {
-  margin-top: 15vh;
-}
+<style lang="scss">
+@import '../styles/colors';
 
 .companies {
   display: flex;
   text-align: center;
-  width: 100%;
+  width: 592px;
+  margin: 92px calc(50% - 296px) 0;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-between;
 }
 
 .company {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 4em;
+  min-width: 272px;
+  height: 116px;
+  margin: 28px 0;
 
-  &__name {
-    font-size: 26px;
+  &--buda {
+    background-image: url('../../assets/images/buda.svg');
   }
 
-  &__logo {
-    align-self: center;
-    max-width: 70%;
+  &--fintual {
+    background-image: url('../../assets/images/fintual.svg');
+  }
 
-    &--small {
-      max-width: 20%;
-    }
+  &--platanus {
+    background-image: url('../../assets/images/platanus.svg');
+  }
+
+  &--unknown {
+    background-image: url('../../assets/images/unknown.svg');
   }
 }
 
 .guest {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: 128px;
   width: 100%;
-  margin-top: 20px;
 
   &__name {
-    width: 70%;
-    height: 32px;
-    line-height: 32px;
-    font-size: 28px;
     border: 0;
-    border-bottom: solid 2px #1f9cce;
-    border-radius: 1px;
+    border-bottom: solid 2px $progressBarColor;
+    font-size: 56px;
+    font-weight: 300;
+    line-height: 66px;
+    margin-bottom: 4px;
     padding-bottom: 8px;
     text-align: center;
-    letter-spacing: 1.5px;
-    margin-bottom: 4px;
+    width: 75%;
   }
 
   &__confirm {
-    background-color: #1f9cce;
-    border: solid 1px #eaeaea;
-    border-radius: 3px;
-    color: #fcfcfc;
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: .6px;
-    line-height: 32px;
-    margin-top: 15px;
-    width: 32%;
+    background-color: $progressBarColor;
+    border-radius: 12px;
+    color: $contrastColor;
+    height: 66px;
+    font-size: 28px;
+    line-height: 66px;
+    margin-top: 28px;
+    width: 195px;
   }
 }
 </style>

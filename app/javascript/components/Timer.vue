@@ -1,15 +1,13 @@
 <template>
   <div class="notified-modal">
-    <div class="notified-modal__title">
-      {{ subject ? `Le acabo de enviar un mensaje a ${subject}` : "Avisé que llegaste!"  }}
-    </div>
-    <div class="notified-modal__message">
-      Espera mientras vienen a recibirte
-    </div>
     <div v-if="seconds" class="notified-modal__timer">
       00:{{ seconds > 9 ? seconds : '0'+seconds }}
     </div>
-    <div v-if="!seconds" class="notified-modal__message">Redirigiendo...</div>
+    <div class="notified-modal__title">
+      {{ subject ? `Le avisé a ${subject} que llegaste` : "Avisé que llegaste"  }}
+    </div>
+    <div v-if="!seconds" class="notified-modal__message">Reiniciando asistente...</div>
+    <div v-if="seconds" class="notified-modal__message">Ringing the bell</div>
   </div>
 </template>
 
@@ -55,25 +53,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import '../styles/colors';
+
   .notified-modal {
+    background-color: $timerBackground;
+    color: $contrastColor;
     height: 100%;
-    padding-top: 20vh;
+    padding-top: 230px;
     position: absolute;
     width: 100%;
 
     &__title {
-      font-size: 36px;
+      font-size: 48px;
       line-height: 70px;
+      padding: 32px 0;
     }
 
     &__message {
-      font-size: 18px;
+      color: $contrastColorLight;
+      font-size: 24px;
+      line-height: 28px;
     }
 
     &__timer {
-      margin: 8px 0;
       font-weight: 600;
-      font-size: 60px;
+      line-height: 85px;
+      font-size: 72px;
     }
   }
 </style>
