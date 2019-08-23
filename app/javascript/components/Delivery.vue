@@ -48,9 +48,11 @@ export default {
   methods: {
     back() {
       this.$router.push({ path: '/' });
+      document.getElementsByClassName("progress-bar")[0].style.width = '25%';
     },
     selectUser(user) {
       this.notifiedUser = user;
+      document.getElementsByClassName("progress-bar")[0].style.width = user ? '75%' : '50%';
     },
     notifyUser() {
       this.timer = true;

@@ -39,6 +39,7 @@ export default {
   },
   mounted() {
     this.startTimer();
+    document.getElementsByClassName("progress-bar")[0].style.width = '100%';
   },
   watch: {
     seconds() {

@@ -45,6 +45,7 @@ export default {
       this.askGuestName = company ? true : false;
       this.title = company ? '¿Cuál es tu nombre?' : '¿En qué empresa?';
       this.subtitle = company ? "What is your first name?" : 'In which company';
+      document.getElementsByClassName("progress-bar")[0].style.width = company ? '75%' : '50%';
       if (company) this.$refs.input.focus();
     },
     notifyChannel() {
@@ -54,6 +55,7 @@ export default {
     },
     back() {
       this.$router.push({ path: '/' })
+      document.getElementsByClassName("progress-bar")[0].style.width = "25%";
     }
   },
 }

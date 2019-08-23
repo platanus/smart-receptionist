@@ -20,6 +20,7 @@
 </template>
 
 <script>
+import { setTimeout } from 'timers';
 
 export default {
   name: 'Menu',
@@ -33,12 +34,19 @@ export default {
       other: false,
     };
   },
+  mounted() {
+    setTimeout(() => {
+      document.getElementsByClassName("progress-bar")[0].style.width = '25%';
+    }, 200)
+  },
   methods: {
     goToMeeting() {
       this.$router.push({ path: 'meeting' })
+      document.getElementsByClassName("progress-bar")[0].style.width = "50%";
     },
     goToDelivery() {
       this.$router.push({ path: 'delivery' })
+      document.getElementsByClassName("progress-bar")[0].style.width = "50%";
     }
   },
 }
@@ -61,6 +69,13 @@ body {
   width: 100%;
   min-height: 100%;
   background-color: #fff;
+}
+
+.progress-bar {
+  height: 4px;
+  background-color: $progressBarColor;
+  width: 1%;
+  transition: width .8s;
 }
 
 .header {
@@ -111,8 +126,9 @@ body {
   align-items: center;
 
   &__logo {
-    height: 120px;
-    width: 120px;
+    background-size: cover;
+    height: 240px;
+    width: 240px;
 
     &--meeting {
       background-image: url('../../assets/images/meeting.svg');
@@ -126,6 +142,7 @@ body {
   &__title {
     font-size: 32px;
     line-height: 28px;
+    padding: 15px 0 0;
   }
 
   &__subtitle {
