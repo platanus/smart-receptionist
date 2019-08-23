@@ -14,7 +14,7 @@
       </div>
       <div class="guest" v-show="askGuestName">
         <button class="header__back" v-on:click="toggleGuest('')"></button>
-        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus placeholder="Escribe aquí">
+        <input ref="input" v-model="guestName" class="guest__name" type="text" autofocus placeholder="Tu nombre">
         <button v-on:click="notifyChannel()" class="guest__confirm">Avisar</button>
       </div>
     </div>
@@ -99,7 +99,7 @@ export default {
 .guest {
   align-items: center;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   margin-top: 128px;
   width: 100%;
 
@@ -109,7 +109,7 @@ export default {
     font-size: 56px;
     font-weight: 300;
     line-height: 66px;
-    margin-bottom: 4px;
+    margin: 0 40px;
     padding-bottom: 8px;
     text-align: center;
     width: 75%;
@@ -122,7 +122,7 @@ export default {
     height: 66px;
     font-size: 28px;
     line-height: 66px;
-    margin-top: 28px;
+    margin: 0 40px;
     width: 195px;
   }
 }
