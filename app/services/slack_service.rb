@@ -1,5 +1,4 @@
 class SlackService
-
   def initialize
     Slack.configure do |config|
       config.token = ENV['SLACK_API_TOKEN']
@@ -14,8 +13,8 @@ class SlackService
     client.chat_postMessage(
       channel: user.slack_id,
       as_user: true,
-      text: "#{user.name}, te buscan en la entrada!"
-  )
+      text: "#{user.real_name}, te buscan en la entrada!"
+    )
   end
 
   def get_slack_user(id)
