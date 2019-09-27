@@ -19,12 +19,27 @@ const router = new Router({
   ],
 });
 
+const RESET_TIME = 120000
+
 document.addEventListener('DOMContentLoaded', () => {
   if (document.getElementById('app') !== null) {
     return new Vue({
       router,
       el: '#app',
       render: h => h(Vue.compile('<div class="app"><div class="progress-bar"></div><router-view></router-view></div>')),
+      data() {
+        return {
+          timer: null,
+        };
+      },
+      watch: {
+        $route() {
+          if (this.timer) clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.$router.push({ path: '/' });
+          }, RESET_TIME)
+        },
+      },
     });
   }
 
