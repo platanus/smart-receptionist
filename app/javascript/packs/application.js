@@ -6,6 +6,7 @@ import Meeting from '../components/Meeting.vue';
 import Delivery from '../components/Delivery.vue';
 import Menu from '../components/Menu.vue';
 import Timer from '../components/Timer.vue';
+import MemberAccess from '../components/MemberAccess.vue';
 
 Vue.config.productionTip = false;
 Vue.component('timer', Timer);
@@ -16,6 +17,7 @@ const router = new Router({
     { path: '/', component: Menu },
     { path: '/meeting', component: Meeting },
     { path: '/delivery', component: Delivery },
+    { path: '/members', component: MemberAccess}
   ],
 });
 
