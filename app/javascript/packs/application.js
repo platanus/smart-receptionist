@@ -1,6 +1,7 @@
 import Vue from 'vue/dist/vue.js';
 
 import Router from 'vue-router';
+import vueTap from 'v-tap';
 
 import Meeting from '../components/Meeting.vue';
 import Delivery from '../components/Delivery.vue';
@@ -11,6 +12,7 @@ import MemberAccess from '../components/MemberAccess.vue';
 Vue.config.productionTip = false;
 Vue.component('timer', Timer);
 Vue.use(Router);
+Vue.use(vueTap);
 
 const router = new Router({
   routes: [

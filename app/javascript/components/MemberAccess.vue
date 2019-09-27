@@ -13,22 +13,27 @@
     </div>
     <div class="keyboard">
       <div class="keyboard__column">
-        <div @click="pushCharacter(1)" class="keyboard__item">1</div>
-        <div @click="pushCharacter(4)" class="keyboard__item">4</div>
-        <div @click="pushCharacter(7)" class="keyboard__item">7</div>
-        <div @click="popCharacter()" class="keyboard__item">x</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:1 }" class="keyboard__item">1</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:4 }" class="keyboard__item">4</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:7 }" class="keyboard__item">7</div>
+        <div v-tap.prevent="{ methods:popCharacter }" class="keyboard__item">x</div>
       </div>
       <div class="keyboard__column">
-        <div @click="pushCharacter(2)" class="keyboard__item">2</div>
-        <div @click="pushCharacter(5)" class="keyboard__item">5</div>
-        <div @click="pushCharacter(8)" class="keyboard__item">8</div>
-        <div @click="pushCharacter(0)" class="keyboard__item">0</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:2 }" class="keyboard__item">2</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:5 }" class="keyboard__item">5</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:8 }" class="keyboard__item">8</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:0 }" class="keyboard__item">0</div>
       </div>
       <div class="keyboard__column">
-        <div @click="pushCharacter(3)" class="keyboard__item">3</div>
-        <div @click="pushCharacter(6)" class="keyboard__item">6</div>
-        <div @click="pushCharacter(9)" class="keyboard__item">9</div>
-        <div @click="confirm()" class="keyboard__item keyboard__item--confirm">OK</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:3 }" class="keyboard__item">3</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:6 }" class="keyboard__item">6</div>
+        <div v-tap.prevent="{ methods:pushCharacter, character:9 }" class="keyboard__item">9</div>
+        <div
+          v-tap.prevent="{ methods:confirm }"
+          :class="{ 'keyboard__item--error': wrongPasscode }"
+          class="keyboard__item keyboard__item--confirm">
+          OK
+        </div>
       </div>
     </div>
   </div>
@@ -40,6 +45,7 @@ export default {
     return {
       code: "12345",
       inputCode: [],
+      wrongPasscode: false,
     };
   },
   mounted() {
@@ -50,16 +56,26 @@ export default {
       this.$router.push({ path: '/' })
       document.getElementsByClassName("progress-bar")[0].style.width = "25%";
     },
-    pushCharacter(character) {
-      if (this.inputCode.length < 5) this.inputCode.push(character);
+    pushCharacter(params) {
+      if (this.inputCode.length < 5) this.inputCode.push(params.character);
     },
     popCharacter() {
       this.inputCode.pop();
+      this.wrongPasscode = false;
     },
     confirm() {
       if (this.inputCode.join("") === this.code) {
-        //call api
+        fetch('http://hass-local.platan.us:8123/api/services/switch/turn_on', {
+          method: 'POST',
+          body: JSON.stringify({'entity_id': 'switch.main_door'}),
+          headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+          },
+        })
         this.$router.push({ path: '/' });
+      } else {
+        this.wrongPasscode = true;
       }
     },
   },
@@ -105,9 +121,10 @@ export default {
     flex: 1;
     line-height: 75px;
     font-size: 34px;
-    transition: background-color 200ms linear;
+    transition: background-color 100ms linear;
     user-select: none;
 
+    &:focus,
     &:active {
       background-color: $searchBarColor;
     }
@@ -116,6 +133,11 @@ export default {
       background-color: $progressBarColor;
       border-color: $progressBarColor;
       color: $contrastColor;
+    }
+
+    &--error {
+      background-color: $passcodeErrorColor;
+      border-color: $passcodeErrorColor;
     }
   }
 }
