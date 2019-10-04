@@ -9,7 +9,7 @@ class ApiService {
     this.options = { headers: this.headers, method: 'GET' };
   }
 
-  openFrontDoor() {
+  openFrontDoor(code) {
     return fetch(`${window.location.origin}/api/v1/open_main_door`, {
       ...this.options,
       method: 'POST',

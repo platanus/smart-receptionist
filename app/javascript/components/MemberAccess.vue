@@ -46,7 +46,6 @@ const client = new ApiService;
 export default {
   data() {
     return {
-      code: "12345",
       inputCode: [],
       wrongPasscode: false,
     };
@@ -66,9 +65,9 @@ export default {
       this.inputCode.pop();
       this.wrongPasscode = false;
     },
-    confirm() {
-      if (this.inputCode.join("") === this.code) {
-        client.openFrontDoor()
+    async confirm() {
+      const response = await client.openFrontDoor(this.inputCode.join(''));
+      if (response.status == 204) {
         this.$router.push({ path: '/' });
       } else {
         this.wrongPasscode = true;
