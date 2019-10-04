@@ -5,6 +5,7 @@ class ApiService {
     this.baseUrl = `${window.location.origin}/api/v1`;
     this.headers = new Headers();
     this.headers.append('Content-Type', 'application/json');
+    this.headers.append('X-CSRF-Token', document.querySelector('meta[name="csrf-token"]').getAttribute('content'));
     this.options = { headers: this.headers, method: 'GET' };
   }
 
