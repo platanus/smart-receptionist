@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users, only: :index
       resources :notifications, only: :create
       post '/open_main_door', to: 'door_actions#open_main_door'
+      post '/open_outside_door', to: 'door_actions#open_outside_door'
     end
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
