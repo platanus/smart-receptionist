@@ -4,8 +4,8 @@
       <div class="header__title">Buen día! A qué vienes hoy?</div>
       <div class="header__subtitle">Hey there! what are you coming to?</div>
     </div>
-    <div @click="goToMemberAccess()" class="members" />
-    <div @click="exit()" class="exit" />
+    <div @click="goToMemberAccess()" class="open-door-icon" />
+    <div @click="exit()" class="open-door-icon open-door-icon--outside" />
     <div class="actions">
       <div class="action" v-on:click="goToMeeting()">
         <div class="action__logo action__logo--meeting" />
@@ -163,7 +163,7 @@ body {
   }
 }
 
-.members {
+.open-door-icon {
   background-image: url('../../assets/images/members.svg');
   background-size: cover;
   position: absolute;
@@ -171,15 +171,10 @@ body {
   right: 60px;
   height: 40px;
   width: 40px;
-}
 
-.exit {
-  background-image: url('../../assets/images/exit.svg');
-  background-size: cover;
-  position: absolute;
-  top: 50px;
-  left: 60px;
-  height: 40px;
-  width: 40px;
+  &--outside {
+    background-image: url('../../assets/images/exit.svg');
+    left: 60px;
+  }
 }
 </style>
