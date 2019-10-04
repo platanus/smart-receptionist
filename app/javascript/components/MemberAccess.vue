@@ -40,6 +40,9 @@
 </template>
 
 <script>
+import ApiService from '../services/api';
+const client = new ApiService;
+
 export default {
   data() {
     return {
@@ -65,14 +68,7 @@ export default {
     },
     confirm() {
       if (this.inputCode.join("") === this.code) {
-        fetch('http://hass-local.platan.us:8123/api/services/switch/turn_on', {
-          method: 'POST',
-          body: JSON.stringify({'entity_id': 'switch.main_door'}),
-          headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-          },
-        })
+        client.openFrontDoor()
         this.$router.push({ path: '/' });
       } else {
         this.wrongPasscode = true;
