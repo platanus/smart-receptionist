@@ -1,6 +1,4 @@
 class Api::V1::NotificationsController < ApplicationController
-  protect_from_forgery except: :create
-
   CHANNELS = {
     buda: ENV.fetch('BUDA_CHANNEL_NAME'),
     fintual: ENV.fetch('FINTUAL_CHANNEL_NAME'),

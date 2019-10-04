@@ -1,21 +1,25 @@
 import Vue from 'vue/dist/vue.js';
 
 import Router from 'vue-router';
+import vueTap from 'v-tap';
 
 import Meeting from '../components/Meeting.vue';
 import Delivery from '../components/Delivery.vue';
 import Menu from '../components/Menu.vue';
 import Timer from '../components/Timer.vue';
+import MemberAccess from '../components/MemberAccess.vue';
 
 Vue.config.productionTip = false;
 Vue.component('timer', Timer);
 Vue.use(Router);
+Vue.use(vueTap);
 
 const router = new Router({
   routes: [
     { path: '/', component: Menu },
     { path: '/meeting', component: Meeting },
     { path: '/delivery', component: Delivery },
+    { path: '/members', component: MemberAccess}
   ],
 });
 

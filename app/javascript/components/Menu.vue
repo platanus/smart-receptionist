@@ -4,6 +4,7 @@
       <div class="header__title">Buen día! A qué vienes hoy?</div>
       <div class="header__subtitle">Hey there! what are you coming to?</div>
     </div>
+    <div @click="goToMemberAccess()" class="members" />
     <div class="actions">
       <div class="action" v-on:click="goToMeeting()">
         <div class="action__logo action__logo--meeting" />
@@ -47,7 +48,11 @@ export default {
     goToDelivery() {
       this.$router.push({ path: 'delivery' })
       document.getElementsByClassName("progress-bar")[0].style.width = "50%";
-    }
+    },
+    goToMemberAccess() {
+      this.$router.push({ path: 'members' })
+      document.getElementsByClassName("progress-bar")[0].style.width = "50%";
+    },
   },
 }
 </script>
@@ -150,5 +155,15 @@ body {
     font-size: 20px;
     line-height: 24px;
   }
+}
+
+.members {
+  background-image: url('../../assets/images/members.svg');
+  background-size: cover;
+  position: absolute;
+  top: 50px;
+  right: 60px;
+  height: 40px;
+  width: 40px;
 }
 </style>
