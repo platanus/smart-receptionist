@@ -13,4 +13,12 @@ class Api::V1::DoorActionsController < ApplicationController
       render json: {}, status: 401
     end
   end
+
+  def open_outside_door
+    HTTParty.post(
+      "http://hass.platan.us:8123/api/services/switch/turn_on?api_password=#{API_KEY}",
+      body: { entity_id: 'switch.outside_door' }.to_json,
+      headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+    )
+  end
 end

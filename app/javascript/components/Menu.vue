@@ -5,6 +5,7 @@
       <div class="header__subtitle">Hey there! what are you coming to?</div>
     </div>
     <div @click="goToMemberAccess()" class="members" />
+    <div @click="exit()" class="exit" />
     <div class="actions">
       <div class="action" v-on:click="goToMeeting()">
         <div class="action__logo action__logo--meeting" />
@@ -22,6 +23,8 @@
 
 <script>
 import { setTimeout } from 'timers';
+import ApiService from '../services/api';
+const client = new ApiService;
 
 export default {
   name: 'Menu',
@@ -53,6 +56,9 @@ export default {
       this.$router.push({ path: 'members' })
       document.getElementsByClassName("progress-bar")[0].style.width = "50%";
     },
+    exit() {
+      client.openOutsideDoor();
+    }
   },
 }
 </script>
@@ -163,6 +169,16 @@ body {
   position: absolute;
   top: 50px;
   right: 60px;
+  height: 40px;
+  width: 40px;
+}
+
+.exit {
+  background-image: url('../../assets/images/exit.svg');
+  background-size: cover;
+  position: absolute;
+  top: 50px;
+  left: 60px;
   height: 40px;
   width: 40px;
 }

@@ -17,6 +17,13 @@ class ApiService {
     })
   }
 
+  openOutsideDoor() {
+    return fetch(`${window.location.origin}/api/v1/open_outside_door`, {
+      ...this.options,
+      method: 'POST',
+    })
+  }
+
   getUsers() {
     return fetch(`${this.baseUrl}/users`, this.options)
       .then(response => response.json())
