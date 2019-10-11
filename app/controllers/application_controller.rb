@@ -1,4 +1,4 @@
 class ApplicationController < ActionController::Base
-  def index
-  end
+  before_action :authenticate_admin_user!, only: [:index]
+  def index; end
 end

@@ -7,7 +7,7 @@ gem 'activeadmin_addons'
 gem 'aws-sdk', '~> 3'
 gem 'bootsnap', require: false
 gem 'coffee-rails', '~> 4.2'
-gem 'devise'
+gem "devise", ">= 4.7.1"
 gem 'devise-i18n'
 gem 'enumerize'
 gem 'httparty'
